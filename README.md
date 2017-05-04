@@ -13,3 +13,6 @@ ant clean all
 ant yunitupdate
 ant alltests -Dtestclasses.extensions=flexiblesearchtests
 ```
+
+## References
+See [the blog post about the Hybris FlexibleSearch API](https://seblink.wordpress.com/2017/05/04/the-hybris-flexiblesearch-api/) for more information.
