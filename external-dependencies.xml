@@ -10,14 +10,20 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.hybris.platform</groupId>
-	<artifactId>flexiblesearchtests</artifactId>
-	<version>6.3.0.0-RC15</version>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.hybris.platform</groupId>
+    <artifactId>flexiblesearchtests</artifactId>
+    <version>6.3.0.0-RC15</version>
 
-	<packaging>jar</packaging>
+    <packaging>jar</packaging>
 
-	<dependencies>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.5.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
