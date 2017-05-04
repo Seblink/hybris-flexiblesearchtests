@@ -78,6 +78,10 @@
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
 
-    <bean id="flexibleSearchInApiService" class="com.seblink.hybris.flexiblesearchtests.service.impl.InSyntaxServiceImpl"/>
-			
+	<bean id="badInSyntaxService" class="com.seblink.hybris.flexiblesearchtests.service.impl.BadInSyntaxServiceImpl"/>
+
+    <bean id="inSyntaxService" class="com.seblink.hybris.flexiblesearchtests.service.impl.InSyntaxServiceImpl"/>
+
+	<bean id="onlySuperTypesSyntaxService" class="com.seblink.hybris.flexiblesearchtests.service.impl.OnlySuperTypesSyntaxServiceImpl"/>
+
 </beans>

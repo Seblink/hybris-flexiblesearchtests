@@ -4,6 +4,7 @@ package com.seblink.hybris.flexiblesearchtests.service;
 import com.seblink.hybris.flexiblesearchtests.enums.MyEnum;
 import de.hybris.platform.core.model.MyModelModel;
 import de.hybris.platform.core.model.MyReferenceModel;
+import de.hybris.platform.core.model.MySubModelModel;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
 import de.hybris.platform.servicelayer.model.ModelService;
 
@@ -16,6 +17,10 @@ public abstract class AbstractIntegrationTest extends ServicelayerTransactionalT
 
     protected MyModelBuilder newMyModel() {
         return new MyModelBuilder();
+    }
+
+    protected MySubModelBuilder newMySubModel() {
+        return new MySubModelBuilder();
     }
 
     protected MyReferenceBuilder newMyReference() {
@@ -41,6 +46,31 @@ public abstract class AbstractIntegrationTest extends ServicelayerTransactionalT
         }
 
         public MyModelModel save() {
+            modelService.save(this.instance);
+            return this.instance;
+        }
+
+    }
+
+    protected class MySubModelBuilder {
+
+        private MySubModelModel instance;
+
+        private MySubModelBuilder() {
+            this.instance = modelService.create(MySubModelModel.class);
+        }
+
+        public MySubModelBuilder withMyReference(MyReferenceModel myReference) {
+            this.instance.setMyReference(myReference);
+            return this;
+        }
+
+        public MySubModelBuilder withMyEnum(MyEnum myEnum) {
+            this.instance.setMyEnum(myEnum);
+            return this;
+        }
+
+        public MySubModelModel save() {
             modelService.save(this.instance);
             return this.instance;
         }

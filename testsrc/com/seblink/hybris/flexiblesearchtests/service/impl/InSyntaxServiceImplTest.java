@@ -23,7 +23,7 @@ import static org.assertj.core.api.Fail.shouldHaveThrown;
 public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
 
     @Resource
-    private InSyntaxServiceImpl flexibleSearchInApiService;
+    private InSyntaxServiceImpl inSyntaxService;
 
     private MyReferenceModel reference1;
     private MyReferenceModel reference2;
@@ -49,7 +49,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     @Test
     public void testInApi_enums_null() throws Exception {
         try {
-            flexibleSearchInApiService.findUsingInApiWithEnums(null);
+            inSyntaxService.findWithEnums(null);
             shouldHaveThrown(IllegalArgumentException.class);
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Value is required, null given for key: enums");
@@ -59,7 +59,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     @Test
     public void testInApi_enums_emptyCollection() throws Exception {
         try {
-            flexibleSearchInApiService.findUsingInApiWithEnums(new ArrayList<>());
+            inSyntaxService.findWithEnums(new ArrayList<>());
             shouldHaveThrown(IllegalArgumentException.class);
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Value is instanceof Collection but cannot be empty collection");
@@ -70,7 +70,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     public void testInApi_enums_singleValue() throws Exception {
         List<MyEnum> input = Collections.singletonList(MyEnum.VALUE_1);
 
-        List<MyModelModel> result = flexibleSearchInApiService.findUsingInApiWithEnums(input);
+        List<MyModelModel> result = inSyntaxService.findWithEnums(input);
 
         assertThat(result).containsExactlyInAnyOrder(myModel1, myModel2);
     }
@@ -79,7 +79,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     public void testInApi_enums_multipleValues() throws Exception {
         List<MyEnum> input = Arrays.asList(MyEnum.VALUE_2, MyEnum.VALUE_3);
 
-        List<MyModelModel> result = flexibleSearchInApiService.findUsingInApiWithEnums(input);
+        List<MyModelModel> result = inSyntaxService.findWithEnums(input);
 
         assertThat(result).containsExactlyInAnyOrder(myModel3, myModel4);
     }
@@ -89,7 +89,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyEnum> input = Collections.singletonList(null);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithEnums(input);
+            inSyntaxService.findWithEnums(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).contains("you cannot search for NULL values - use 'IS NULL' statements instead");
@@ -101,7 +101,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyEnum> input = Arrays.asList(MyEnum.VALUE_2, null, MyEnum.VALUE_3);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithEnums(input);
+            inSyntaxService.findWithEnums(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).isNull();
@@ -115,7 +115,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyEnum> input = Arrays.asList(null, MyEnum.VALUE_2, MyEnum.VALUE_3);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithEnums(input);
+            inSyntaxService.findWithEnums(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).isNull();
@@ -128,7 +128,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     @Test
     public void testInApi_references_null() throws Exception {
         try {
-            flexibleSearchInApiService.findUsingInApiWithReferences(null);
+            inSyntaxService.findWithReferences(null);
             shouldHaveThrown(IllegalArgumentException.class);
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Value is required, null given for key: references");
@@ -138,7 +138,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     @Test
     public void testInApi_references_emptyCollection() throws Exception {
         try {
-            flexibleSearchInApiService.findUsingInApiWithReferences(new ArrayList<>());
+            inSyntaxService.findWithReferences(new ArrayList<>());
             shouldHaveThrown(IllegalArgumentException.class);
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage()).isEqualTo("Value is instanceof Collection but cannot be empty collection");
@@ -149,7 +149,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     public void testInApi_references_singleValue() throws Exception {
         List<MyReferenceModel> input = Collections.singletonList(reference1);
 
-        List<MyModelModel> result = flexibleSearchInApiService.findUsingInApiWithReferences(input);
+        List<MyModelModel> result = inSyntaxService.findWithReferences(input);
 
         assertThat(result).containsExactlyInAnyOrder(myModel1, myModel2);
     }
@@ -158,7 +158,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
     public void testInApi_references_multipleValues() throws Exception {
         List<MyReferenceModel> input = Arrays.asList(reference2, reference3);
 
-        List<MyModelModel> result = flexibleSearchInApiService.findUsingInApiWithReferences(input);
+        List<MyModelModel> result = inSyntaxService.findWithReferences(input);
 
         assertThat(result).containsExactlyInAnyOrder(myModel3, myModel4);
     }
@@ -168,7 +168,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyReferenceModel> input = Collections.singletonList(null);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithReferences(input);
+            inSyntaxService.findWithReferences(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).contains("you cannot search for NULL values - use 'IS NULL' statements instead");
@@ -180,7 +180,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyReferenceModel> input = Arrays.asList(reference2, null, reference3);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithReferences(input);
+            inSyntaxService.findWithReferences(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).isNull();
@@ -194,7 +194,7 @@ public class InSyntaxServiceImplTest extends AbstractIntegrationTest {
         List<MyReferenceModel> input = Arrays.asList(null, reference2, reference3);
 
         try {
-            flexibleSearchInApiService.findUsingInApiWithReferences(input);
+            inSyntaxService.findWithReferences(input);
             shouldHaveThrown(FlexibleSearchException.class);
         } catch (FlexibleSearchException e) {
             assertThat(e.getMessage()).isNull();

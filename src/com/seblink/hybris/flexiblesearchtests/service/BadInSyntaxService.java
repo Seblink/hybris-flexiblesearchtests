@@ -7,10 +7,7 @@ import de.hybris.platform.core.model.MyReferenceModel;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Service to perform FlexibleSearch queries using the 'IN (...)' syntax.
- */
-public interface InSyntaxService {
+public interface BadInSyntaxService {
 
     List<MyModelModel> findWithEnums(Collection<MyEnum> enums);
 

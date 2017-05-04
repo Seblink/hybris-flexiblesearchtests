@@ -1,42 +1,37 @@
 package com.seblink.hybris.flexiblesearchtests.service.impl;
 
-import com.seblink.hybris.flexiblesearchtests.enums.MyEnum;
-import com.seblink.hybris.flexiblesearchtests.service.InSyntaxService;
+import com.seblink.hybris.flexiblesearchtests.service.OnlySuperTypesSyntaxService;
 import de.hybris.platform.core.model.MyModelModel;
-import de.hybris.platform.core.model.MyReferenceModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
 import java.util.List;
 
-public class InSyntaxServiceImpl implements InSyntaxService {
+public class OnlySuperTypesSyntaxServiceImpl implements OnlySuperTypesSyntaxService {
 
     private final FlexibleSearchService flexibleSearchService;
 
     @Autowired
-    public InSyntaxServiceImpl(FlexibleSearchService flexibleSearchService) {
+    public OnlySuperTypesSyntaxServiceImpl(FlexibleSearchService flexibleSearchService) {
         this.flexibleSearchService = flexibleSearchService;
     }
 
     @Override
-    public List<MyModelModel> findWithEnums(Collection<MyEnum> enums) {
+    public List<MyModelModel> findAll() {
         final String statement =
-                "SELECT {pk} FROM {MyModel} WHERE {myEnum} IN (?enums)";
+                "SELECT {pk} FROM {MyModel}";
 
         final FlexibleSearchQuery query = new FlexibleSearchQuery(statement);
-        query.addQueryParameter("enums", enums);
         return flexibleSearchService.<MyModelModel>search(query).getResult();
     }
 
     @Override
-    public List<MyModelModel> findWithReferences(Collection<MyReferenceModel> references) {
+    public List<MyModelModel> findAllExcludingSubtypes() {
         final String statement =
-                "SELECT {pk} FROM {MyModel} WHERE {myReference} IN (?references)";
+                "SELECT {pk} FROM {MyModel!}";
 
         final FlexibleSearchQuery query = new FlexibleSearchQuery(statement);
-        query.addQueryParameter("references", references);
         return flexibleSearchService.<MyModelModel>search(query).getResult();
     }
 }

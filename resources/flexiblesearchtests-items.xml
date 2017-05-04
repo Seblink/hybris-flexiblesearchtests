@@ -40,5 +40,9 @@
         <itemtype code="MyReference" generate="false" autocreate="true">
             <deployment table="myreference" typecode="15001"/>
 		</itemtype>
+
+        <itemtype code="MySubModel" generate="false" autocreate="true" extends="MyModel">
+
+        </itemtype>
 	</itemtypes>
 </items>

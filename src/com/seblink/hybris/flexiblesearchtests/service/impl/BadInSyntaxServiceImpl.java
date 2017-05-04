@@ -1,7 +1,7 @@
 package com.seblink.hybris.flexiblesearchtests.service.impl;
 
 import com.seblink.hybris.flexiblesearchtests.enums.MyEnum;
-import com.seblink.hybris.flexiblesearchtests.service.InSyntaxService;
+import com.seblink.hybris.flexiblesearchtests.service.BadInSyntaxService;
 import de.hybris.platform.core.model.MyModelModel;
 import de.hybris.platform.core.model.MyReferenceModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -11,19 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
 import java.util.List;
 
-public class InSyntaxServiceImpl implements InSyntaxService {
+public class BadInSyntaxServiceImpl implements BadInSyntaxService {
 
-    private final FlexibleSearchService flexibleSearchService;
+     private final FlexibleSearchService flexibleSearchService;
 
     @Autowired
-    public InSyntaxServiceImpl(FlexibleSearchService flexibleSearchService) {
+    public BadInSyntaxServiceImpl(FlexibleSearchService flexibleSearchService) {
         this.flexibleSearchService = flexibleSearchService;
     }
 
     @Override
     public List<MyModelModel> findWithEnums(Collection<MyEnum> enums) {
         final String statement =
-                "SELECT {pk} FROM {MyModel} WHERE {myEnum} IN (?enums)";
+                "SELECT {pk} FROM {MyModel} WHERE {myEnum} IN ?enums";
 
         final FlexibleSearchQuery query = new FlexibleSearchQuery(statement);
         query.addQueryParameter("enums", enums);
@@ -33,7 +33,7 @@ public class InSyntaxServiceImpl implements InSyntaxService {
     @Override
     public List<MyModelModel> findWithReferences(Collection<MyReferenceModel> references) {
         final String statement =
-                "SELECT {pk} FROM {MyModel} WHERE {myReference} IN (?references)";
+                "SELECT {pk} FROM {MyModel} WHERE {myReference} IN ?references";
 
         final FlexibleSearchQuery query = new FlexibleSearchQuery(statement);
         query.addQueryParameter("references", references);
