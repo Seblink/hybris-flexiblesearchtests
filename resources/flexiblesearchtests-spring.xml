@@ -77,17 +77,7 @@
 	      	            !execution(* getPK(..))" />  	            
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
-	
-    <bean id="flexiblesearchtestsSystemSetup" class="com.seblink.hybris.flexiblesearchtests.setup.FlexiblesearchtestsSystemSetup">
-        <!-- constructor arg injection example -->
-        <constructor-arg ref="flexiblesearchtestsService"/>
-    </bean>
 
-    <bean id="flexiblesearchtestsService" class="com.seblink.hybris.flexiblesearchtests.service.impl.DefaultFlexiblesearchtestsService">
-        <!-- setter injection example -->
-        <property name="modelService" ref="modelService"/>
-        <property name="mediaService" ref="mediaService"/>
-        <property name="flexibleSearchService" ref="flexibleSearchService"/>
-    </bean>
+    <bean id="flexibleSearchInApiService" class="com.seblink.hybris.flexiblesearchtests.service.impl.InSyntaxServiceImpl"/>
 			
 </beans>
