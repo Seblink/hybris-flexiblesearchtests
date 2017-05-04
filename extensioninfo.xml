@@ -23,8 +23,6 @@
 
       <coremodule generated="true" manager="com.seblink.hybris.flexiblesearchtests.jalo.FlexiblesearchtestsManager" packageroot="com.seblink.hybris.flexiblesearchtests"/>
 
-      <webmodule jspcompile="false" webroot="/flexiblesearchtests"/>
-					
    </extension>
       
 </extensioninfo>
